@@ -32,10 +32,40 @@ public abstract class Person: Entity<Person>
         }
     }
 
-    protected Person(string firstname, string lastname)
+    private DateOnly _birthday;
+
+    public DateOnly Birthday
+    {
+        get => _birthday;
+        protected set
+        {
+            _birthday = value.Throw()
+                .IfNull(bd => bd);
+        }
+    }
+
+    private string _phone;
+
+    public string Phone
+    {
+        get => _phone;
+        protected set
+        {
+            _phone = value.Throw()
+                .IfNullOrWhiteSpace(p => p);
+        }
+    }
+
+    protected Person(
+        string firstname, 
+        string lastname, 
+        DateOnly birthday, 
+        string phone)
         : base(Guid.NewGuid())
     {
         FirstName = firstname;
         LastName = lastname;
+        Birthday = birthday;
+        Phone = phone;
     }
 }
