@@ -6,7 +6,7 @@ namespace EntityClasses.Person;
 /// <summary>
 /// Abstract class for people (adds firstname and lastname to abstract entity class)
 /// </summary>
-public abstract class Person: Entity
+public abstract class Person: Entity<Person>
 {
     private string _firstname;
 
