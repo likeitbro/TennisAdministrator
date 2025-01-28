@@ -1,16 +1,15 @@
-﻿using EntityClasses.Abstractions;
-using Throw;
+﻿using Throw;
 
-namespace EntityClasses.Person;
+namespace EntityClasses.Abstractions;
 
 /// <summary>
 /// Abstract class for people (adds firstname and lastname to abstract entity class)
 /// </summary>
-public abstract class Person: Entity<Person>
+public abstract class Person : Entity<Person>
 {
     private string _firstname;
 
-    public string FirstName 
+    public string FirstName
     {
         get => _firstname;
         protected set
@@ -56,10 +55,15 @@ public abstract class Person: Entity<Person>
         }
     }
 
+    protected Person()
+    {
+
+    }
+
     protected Person(
-        string firstname, 
-        string lastname, 
-        DateOnly birthday, 
+        string firstname,
+        string lastname,
+        DateOnly birthday,
         string phone)
         : base(Guid.NewGuid())
     {
