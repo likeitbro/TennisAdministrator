@@ -24,6 +24,7 @@ public class Specialization: Entity<Specialization>
     }
 
     private Specialization(Guid trainerId, Guid sportId)
+        : base(Guid.NewGuid())
     {
         TrainerId = trainerId;
         SportId = sportId;
