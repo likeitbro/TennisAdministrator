@@ -23,6 +23,8 @@ public class Tournament: Entity<Tournament>
             .IfNull(s => s);
     }
 
+    public Sport Sport { get; protected set; }
+
     private float _price;
 
     public float Price
