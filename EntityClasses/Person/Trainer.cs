@@ -5,6 +5,15 @@ namespace EntityClasses.Person;
 
 public class Trainer: EntityClasses.Abstractions.Person
 {
+    private Guid _typeId;
+
+    public Guid TypeId
+    {
+        get => _typeId;
+        set => _typeId = value.Throw()
+            .IfNull(ti => ti);
+    }
+
     private DateOnly _experience;
 
     public DateOnly Experience
@@ -39,6 +48,7 @@ public class Trainer: EntityClasses.Abstractions.Person
     public List<Reservation> Reservations { get; protected set; }
 
     protected Trainer(
+        Guid typeId,
         string firstname,
         string lastname,
         DateOnly birthday,
@@ -54,6 +64,7 @@ public class Trainer: EntityClasses.Abstractions.Person
     }
 
     public static Trainer Create(
+        Guid typeId,
         string firstname,
         string lastname,
         DateOnly birthday,
@@ -63,6 +74,7 @@ public class Trainer: EntityClasses.Abstractions.Person
         float price)
     {
         return new(
+            typeId,
             firstname,
             lastname,
             birthday,
@@ -73,6 +85,7 @@ public class Trainer: EntityClasses.Abstractions.Person
     }
 
     public void Update(
+        Guid typeId,
         string firstname,
         string lastname,
         DateOnly birthday,
@@ -81,6 +94,7 @@ public class Trainer: EntityClasses.Abstractions.Person
         string description,
         float price)
     {
+        TypeId = typeId;
         FirstName = firstname; 
         LastName = lastname;
         Birthday = birthday;
