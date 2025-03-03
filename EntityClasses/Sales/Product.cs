@@ -14,6 +14,15 @@ public class Product: Entity<Product>
             .IfNullOrWhiteSpace(n => n);
     }
 
+    private Guid _typeId;
+
+    public Guid TypeId
+    {
+        get => _typeId;
+        set => _typeId = value.Throw()
+            .IfNull(ti => ti);
+    }
+
     private float _price;
 
     public float Price
@@ -38,21 +47,23 @@ public class Product: Entity<Product>
 
     public List<SaleDetail> SaleDetails { get; protected set; }
 
-    private Product(string name, float price, int quantity)
+    private Product(Guid typeId, string name, float price, int quantity)
         :base(Guid.NewGuid())
     {
+        TypeId = typeId;
         Name = name;
         Price = price;
         Quantity = quantity;
     }
 
-    public static Product Create(string name, float price, int quantity)
+    public static Product Create(Guid typeId, string name, float price, int quantity)
     {
-        return new(name, price, quantity);
+        return new(typeId, name, price, quantity);
     }
 
-    public void Update(string name, float price, int quantity)
+    public void Update(Guid typeId, string name, float price, int quantity)
     {
+        TypeId = typeId;
         Name = name;
         Price = price;
         Quantity = quantity;
