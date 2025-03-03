@@ -1,4 +1,5 @@
 ﻿using EntityClasses.Abstractions;
+using EntityClasses.Tournaments;
 using Throw;
 
 namespace EntityClasses;
@@ -13,6 +14,10 @@ public class Sport: Entity<Sport>
         set => _name = value.Throw()
             .IfNullOrWhiteSpace(n => n);
     }
+
+    public List<Tournament> Tournaments { get; protected set; }
+
+    public List<Specialization> Specializations { get; protected set; }
 
     public Sport(string name)
         :base(Guid.NewGuid())
