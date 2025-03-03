@@ -1,4 +1,5 @@
 ﻿using EntityClasses.Abstractions;
+using EntityClasses.Person;
 using Throw;
 
 namespace EntityClasses.Tournaments;
@@ -22,6 +23,10 @@ public class TournamentAttendee: Entity<TournamentAttendee>
         protected set => _tournamentId = value.Throw()
             .IfNull(ti => ti);
     }
+
+    public Tournament Tournament { get; protected set; }
+
+    public Client Attendee { get; protected set; }
 
     private TournamentAttendee(Guid clientId, Guid tournamentId)
         :base(Guid.NewGuid())

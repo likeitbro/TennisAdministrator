@@ -32,6 +32,12 @@ public class Trainer: EntityClasses.Abstractions.Person
             .IfNegative(p => p);
     }
 
+    public TrainerType TrainerType { get; protected set; }
+
+    public List<Specialization> Specializations { get; protected set; }
+
+    public List<Reservation> Reservations { get; protected set; }
+
     protected Trainer(
         string firstname,
         string lastname,

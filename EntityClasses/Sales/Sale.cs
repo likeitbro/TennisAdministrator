@@ -1,4 +1,5 @@
 ﻿using EntityClasses.Abstractions;
+using EntityClasses.Person;
 using Throw;
 
 namespace EntityClasses.Sales;
@@ -32,6 +33,10 @@ public class Sale: Entity<Sale>
             .IfNull(r => r)
             .IfNegative(r => r);
     }
+
+    public List<SaleDetail> SaleDetails { get; protected set; }
+
+    public Client Client { get; protected set; }
 
     private Sale(Guid clientId, DateTime saleTime, float revenue)
         :base(Guid.NewGuid())

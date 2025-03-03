@@ -33,6 +33,10 @@ public class SaleDetail: Entity<SaleDetail>
             .IfNegative(c => c);
     }
 
+    public Sale Sale { get; protected set; }
+
+    public Product Product { get; protected set; }
+
     private SaleDetail(Guid saleId, Guid productId, int count)
         :base(Guid.NewGuid())
     {

@@ -17,6 +17,8 @@ public class ProductType : Entity<ProductType>
         }
     }
 
+    public List<Product> Products { get; protected set; }
+
     protected ProductType(string name)
         : base(Guid.NewGuid())
     {

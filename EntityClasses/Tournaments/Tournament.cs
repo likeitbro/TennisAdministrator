@@ -23,8 +23,6 @@ public class Tournament: Entity<Tournament>
             .IfNull(s => s);
     }
 
-    public Sport Sport { get; protected set; }
-
     private float _price;
 
     public float Price
@@ -62,6 +60,10 @@ public class Tournament: Entity<Tournament>
             .IfNull(s => s)
             .IfNegative(s => s);
     }
+
+    public List<TournamentAttendee> TournamentAttendees { get; protected set; }
+
+    public Sport Sport { get; protected set; }
 
     private Tournament(string name, Guid sportId, float price, DateTime date, TimeOnly length, int slots)
         :base(Guid.NewGuid())

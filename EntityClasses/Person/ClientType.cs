@@ -17,6 +17,8 @@ public class ClientType: Entity<ClientType>
         }
     }
 
+    public List<Client> Clients { get; protected set; }
+
     protected ClientType(string name)
         :base(Guid.NewGuid())
     {

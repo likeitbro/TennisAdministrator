@@ -39,6 +39,8 @@ public class Court : Entity<Court>
             .IfNegativeOrZero(p => p);
     }
 
+    public List<Reservation> Reservations { get; protected set; }
+
     protected Court(string name, string description, float price)
         : base(Guid.NewGuid())
     {

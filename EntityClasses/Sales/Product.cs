@@ -34,6 +34,10 @@ public class Product: Entity<Product>
             .IfNegative(q => q);
     }
 
+    public ProductType ProductType { get; protected set; }
+
+    public List<SaleDetail> SaleDetails { get; protected set; }
+
     private Product(string name, float price, int quantity)
         :base(Guid.NewGuid())
     {

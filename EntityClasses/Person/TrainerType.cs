@@ -17,6 +17,8 @@ public class TrainerType : Entity<TrainerType>
         }
     }
 
+    public List<Trainer> Trainers { get; protected set; }
+
     protected TrainerType(string name)
         : base(Guid.NewGuid())
     {
