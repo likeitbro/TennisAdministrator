@@ -10,7 +10,7 @@ public class Sale: Entity<Sale>
     public Guid ClientId
     {
         get => _clientId;
-        set => _clientId = value.Throw()
+        protected set => _clientId = value.Throw()
             .IfNull(ci => ci);
     }
 
@@ -19,7 +19,7 @@ public class Sale: Entity<Sale>
     public DateTime SaleTime
     {
         get => _saleTime;
-        set => _saleTime = value.Throw()
+        protected set => _saleTime = value.Throw()
             .IfNull(st => st);
     }
 
@@ -28,7 +28,7 @@ public class Sale: Entity<Sale>
     public float Revenue
     {
         get => _revenue;
-        set => _revenue = value.Throw()
+        protected set => _revenue = value.Throw()
             .IfNull(r => r)
             .IfNegative(r => r);
     }

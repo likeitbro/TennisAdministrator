@@ -10,7 +10,7 @@ public class Product: Entity<Product>
     public string Name
     {
         get => _name;
-        set => _name = value.Throw()
+        protected set => _name = value.Throw()
             .IfNullOrWhiteSpace(n => n);
     }
 
@@ -19,7 +19,7 @@ public class Product: Entity<Product>
     public float Price
     {
         get => _price;
-        set => _price = value.Throw()
+        protected set => _price = value.Throw()
             .IfNull(p => p)
             .IfNegativeOrZero(p => p);
     }
@@ -29,7 +29,7 @@ public class Product: Entity<Product>
     public int Quantity
     {
         get => _quantity;
-        set => _quantity = value.Throw()
+        protected set => _quantity = value.Throw()
             .IfNull(q => q)
             .IfNegative(q => q);
     }

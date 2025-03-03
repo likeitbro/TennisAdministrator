@@ -11,7 +11,7 @@ public class Sport: Entity<Sport>
     public string Name
     {
         get => _name;
-        set => _name = value.Throw()
+        protected set => _name = value.Throw()
             .IfNullOrWhiteSpace(n => n);
     }
 

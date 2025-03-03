@@ -10,7 +10,7 @@ public class TournamentAttendee: Entity<TournamentAttendee>
     public Guid ClientId
     {
         get => _clientId;
-        set => _clientId = value.Throw()
+        protected set => _clientId = value.Throw()
             .IfNull(ci => ci);
     }
 
@@ -19,7 +19,7 @@ public class TournamentAttendee: Entity<TournamentAttendee>
     public Guid TournamentId
     {
         get => _tournamentId;
-        set => _tournamentId = value.Throw()
+        protected set => _tournamentId = value.Throw()
             .IfNull(ti => ti);
     }
 

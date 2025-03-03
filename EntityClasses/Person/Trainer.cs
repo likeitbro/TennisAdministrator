@@ -10,7 +10,7 @@ public class Trainer: EntityClasses.Abstractions.Person
     public DateOnly Experience
     {
         get => _experience;
-        set => _experience = value.Throw().IfNull(e => e);
+        protected set => _experience = value.Throw().IfNull(e => e);
     }
 
     private string _description;
@@ -18,7 +18,7 @@ public class Trainer: EntityClasses.Abstractions.Person
     public string Description
     {
         get => _description;
-        set => _description = value.Throw()
+        protected set => _description = value.Throw()
             .IfNullOrWhiteSpace(d => d);
     }
 
@@ -27,7 +27,7 @@ public class Trainer: EntityClasses.Abstractions.Person
     public float Price
     {
         get => _price;
-        set => _price = value.Throw()
+        protected set => _price = value.Throw()
             .IfNull(p => p)
             .IfNegative(p => p);
     }

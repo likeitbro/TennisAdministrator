@@ -10,7 +10,7 @@ public class Tournament: Entity<Tournament>
     public string Name
     {
         get => _name;
-        set => _name = value.Throw()
+        protected set => _name = value.Throw()
             .IfNullOrWhiteSpace(n => n);
     }
 
@@ -19,7 +19,7 @@ public class Tournament: Entity<Tournament>
     public Guid SportId
     {
         get => _sportId;
-        set => _sportId = value.Throw()
+        protected set => _sportId = value.Throw()
             .IfNull(s => s);
     }
 
@@ -30,7 +30,7 @@ public class Tournament: Entity<Tournament>
     public float Price
     {
         get => _price;
-        set => _price = value.Throw()
+        protected set => _price = value.Throw()
             .IfNull(p => p)
             .IfNegative(p => p);
     }
@@ -40,7 +40,7 @@ public class Tournament: Entity<Tournament>
     public DateTime Date
     {
         get => _date;
-        set => _date = value.Throw()
+        protected set => _date = value.Throw()
             .IfNull(d => d);
     }
 
@@ -49,7 +49,7 @@ public class Tournament: Entity<Tournament>
     public TimeOnly Length
     {
         get => _length;
-        set => _length = value.Throw()
+        protected set => _length = value.Throw()
             .IfNull(l => l);
     }
 
@@ -58,7 +58,7 @@ public class Tournament: Entity<Tournament>
     public int Slots
     {
         get => _slots;
-        set => _slots = value.Throw()
+        protected set => _slots = value.Throw()
             .IfNull(s => s)
             .IfNegative(s => s);
     }

@@ -10,7 +10,7 @@ public class SaleDetail: Entity<SaleDetail>
     public Guid SaleId
     {
         get => _saleId;
-        set => _saleId = value.Throw()
+        protected set => _saleId = value.Throw()
             .IfNull(si => si);
     }
 
@@ -19,7 +19,7 @@ public class SaleDetail: Entity<SaleDetail>
     public Guid ProductId
     {
         get => _productId;
-        set => _productId = value.Throw()
+        protected set => _productId = value.Throw()
             .IfNull(pi => pi);
     }
 
@@ -28,7 +28,7 @@ public class SaleDetail: Entity<SaleDetail>
     public int Count
     {
         get => _count;
-        set => _count = value.Throw()
+        protected set => _count = value.Throw()
             .IfNull(c => c)
             .IfNegative(c => c);
     }
