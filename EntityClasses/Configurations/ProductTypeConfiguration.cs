@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace EntityClasses.Configurations;
 
-internal class ProductTypeConfiguration: IEntityTypeConfiguration<ProductType>
+public class ProductTypeConfiguration: IEntityTypeConfiguration<ProductType>
 {
     public void Configure(EntityTypeBuilder<ProductType> builder)
     {
