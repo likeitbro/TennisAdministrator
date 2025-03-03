@@ -1,4 +1,5 @@
 ﻿using EntityClasses.Abstractions;
+using EntityClasses.Person;
 using Throw;
 
 namespace EntityClasses;
@@ -10,7 +11,7 @@ public class Specialization: Entity<Specialization>
     public Guid TrainerId
     {
         get => _trainerId;
-        set => _trainerId = value.Throw()
+        protected set => _trainerId = value.Throw()
             .IfNull(ti => ti);
     }
 
@@ -19,9 +20,13 @@ public class Specialization: Entity<Specialization>
     public Guid SportId
     {
         get => _sportId;
-        set => _sportId = value.Throw()
+        protected set => _sportId = value.Throw()
             .IfNull(si => si);
     }
+
+    public Trainer Trainer { get; protected set; }
+
+    public Sport Sport { get; protected set; }
 
     private Specialization(Guid trainerId, Guid sportId)
         : base(Guid.NewGuid())

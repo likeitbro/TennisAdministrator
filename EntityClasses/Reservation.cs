@@ -1,4 +1,5 @@
 ﻿using EntityClasses.Abstractions;
+using EntityClasses.Person;
 using Throw;
 
 namespace EntityClasses;
@@ -10,7 +11,7 @@ public class Reservation : Entity<Reservation>
     public Guid ClientId
     {
         get => _clientId;
-        set => _clientId = value.Throw()
+        protected set => _clientId = value.Throw()
             .IfNull(ci => ci);
     }
 
@@ -20,7 +21,7 @@ public class Reservation : Entity<Reservation>
     public Guid? TrainerId
     {
         get => _trainerId;
-        set => _trainerId = value;
+        protected set => _trainerId = value;
 
     }
 
@@ -29,7 +30,7 @@ public class Reservation : Entity<Reservation>
     public Guid CourtId
     {
         get => _courtId;
-        set => _courtId = value.Throw()
+        protected set => _courtId = value.Throw()
             .IfNull(ci => ci);
 
     }
@@ -39,7 +40,7 @@ public class Reservation : Entity<Reservation>
     public int Price
     {
         get => _price;
-        set => _price = value.Throw()
+        protected set => _price = value.Throw()
             .IfNull(p => p)
             .IfNegative(p => p);
     }
@@ -49,7 +50,7 @@ public class Reservation : Entity<Reservation>
     public DateTime StartTime
     {
         get => _startTime;
-        set => _startTime = value.Throw()
+        protected set => _startTime = value.Throw()
             .IfNull(st => st);
     }
 
@@ -58,9 +59,15 @@ public class Reservation : Entity<Reservation>
     public TimeOnly Length
     {
         get => _length;
-        set => _length = value.Throw()
+        protected set => _length = value.Throw()
             .IfNull(l => l);
     }
+
+    public Client Client { get; protected set; }
+
+    public Trainer Trainer { get; protected set; }
+
+    public Court Court { get; protected set; }
 
     private Reservation(Guid clientId, Guid? trainerId, Guid courtId, int price, DateTime startTime, TimeOnly length)
         :base(Guid.NewGuid())
