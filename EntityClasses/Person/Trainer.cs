@@ -47,6 +47,8 @@ public class Trainer: EntityClasses.Abstractions.Person
 
     public List<Reservation> Reservations { get; protected set; }
 
+    private Trainer() { }
+
     protected Trainer(
         Guid typeId,
         string firstname,

@@ -1,6 +1,4 @@
 ﻿using Throw;
-using EntityClasses.Abstractions;
-using System.Runtime.CompilerServices;
 using EntityClasses.Sales;
 using EntityClasses.Tournaments;
 
@@ -25,6 +23,8 @@ public class Client : EntityClasses.Abstractions.Person
     public List<Reservation> Reservations { get; protected set; }
 
     public List<TournamentAttendee> Attends { get; protected set; }
+
+    private Client() { }
 
     protected Client(string firstname, string lastname, DateOnly birthday, string phone, Guid clientTypeId)
         :base(firstname, lastname, birthday, phone)
