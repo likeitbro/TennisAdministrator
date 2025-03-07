@@ -14,6 +14,8 @@ public class SaleDetailConfiguration : IEntityTypeConfiguration<SaleDetail>
 
         builder.Property(sd => sd.SaleId).IsRequired();
 
+        builder.Property(sd => sd.Count).IsRequired();
+
         builder.HasOne<Product>(sd => sd.Product)
             .WithMany(p => p.SaleDetails)
             .HasForeignKey(sd => sd.ProductId)
