@@ -54,7 +54,7 @@ public class Reservation : Entity<Reservation>
             .IfNull(st => st);
     }
 
-    public TimeOnly _length;
+    private TimeOnly _length;
 
     public TimeOnly Length
     {
