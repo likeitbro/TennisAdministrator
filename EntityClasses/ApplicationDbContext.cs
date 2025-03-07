@@ -36,6 +36,6 @@ internal class ApplicationDbContext: DbContext
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
         optionsBuilder.UseSqlServer(
-            @"Server=DESKTOP-HS2KJMA\SQLEXPRESS;Database=TennisDB;ConnectRetryCount=0");
+            @"Server=DESKTOP-HS2KJMA\SQLEXPRESS;Database=TennisDB;Trusted_Connection=True;MultipleActiveResultSets=True;TrustServerCertificate=True;");
     }
 }
