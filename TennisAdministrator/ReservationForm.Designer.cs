@@ -105,6 +105,7 @@
             button2.TextAlign = ContentAlignment.MiddleLeft;
             button2.TextImageRelation = TextImageRelation.ImageBeforeText;
             button2.UseVisualStyleBackColor = true;
+            button2.Click += button2_Click;
             // 
             // ReservationForm
             // 
