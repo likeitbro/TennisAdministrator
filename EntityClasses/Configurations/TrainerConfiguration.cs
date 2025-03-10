@@ -10,7 +10,7 @@ public class TrainerConfiguration : IEntityTypeConfiguration<Trainer>
     {
         builder.HasKey(t => t.Id);
 
-        builder.Property(t => t.TypeId).IsRequired();
+        builder.Property(t => t.TrainerTypeId).IsRequired();
 
         builder.Property(t => t.FirstName).IsRequired().HasMaxLength(50);
 
@@ -26,7 +26,7 @@ public class TrainerConfiguration : IEntityTypeConfiguration<Trainer>
 
         builder.HasOne<TrainerType>(t => t.TrainerType)
             .WithMany(tt => tt.Trainers)
-            .HasForeignKey(t => t.TypeId)
+            .HasForeignKey(t => t.TrainerTypeId)
             .IsRequired();
     }
 }

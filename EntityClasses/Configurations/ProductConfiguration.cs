@@ -10,7 +10,7 @@ public class ProductConfiguration : IEntityTypeConfiguration<Product>
     {
         builder.HasKey(p => p.Id);
 
-        builder.Property(p => p.TypeId).IsRequired();
+        builder.Property(p => p.ProductTypeId).IsRequired();
 
         builder.Property(p => p.Name).IsRequired().HasMaxLength(50);
 
@@ -20,7 +20,7 @@ public class ProductConfiguration : IEntityTypeConfiguration<Product>
 
         builder.HasOne<ProductType>(p => p.ProductType)
             .WithMany(pt => pt.Products)
-            .HasForeignKey(p => p.TypeId)
+            .HasForeignKey(p => p.ProductTypeId)
             .IsRequired();
     }
 }

@@ -14,12 +14,12 @@ public class Product: Entity<Product>
             .IfNullOrWhiteSpace(n => n);
     }
 
-    private Guid _typeId;
+    private Guid _productTypeId;
 
-    public Guid TypeId
+    public Guid ProductTypeId
     {
-        get => _typeId;
-        set => _typeId = value.Throw()
+        get => _productTypeId;
+        set => _productTypeId = value.Throw()
             .IfNull(ti => ti);
     }
 
@@ -47,23 +47,23 @@ public class Product: Entity<Product>
 
     public List<SaleDetail> SaleDetails { get; protected set; }
 
-    private Product(Guid typeId, string name, float price, int quantity)
+    private Product(Guid productTypeId, string name, float price, int quantity)
         :base(Guid.NewGuid())
     {
-        TypeId = typeId;
+        ProductTypeId = productTypeId;
         Name = name;
         Price = price;
         Quantity = quantity;
     }
 
-    public static Product Create(Guid typeId, string name, float price, int quantity)
+    public static Product Create(Guid productTypeId, string name, float price, int quantity)
     {
-        return new(typeId, name, price, quantity);
+        return new(productTypeId, name, price, quantity);
     }
 
-    public void Update(Guid typeId, string name, float price, int quantity)
+    public void Update(Guid productTypeId, string name, float price, int quantity)
     {
-        TypeId = typeId;
+        ProductTypeId = productTypeId;
         Name = name;
         Price = price;
         Quantity = quantity;

@@ -5,12 +5,12 @@ namespace EntityClasses.Person;
 
 public class Trainer: EntityClasses.Abstractions.Person
 {
-    private Guid _typeId;
+    private Guid _trainerTypeId;
 
-    public Guid TypeId
+    public Guid TrainerTypeId
     {
-        get => _typeId;
-        set => _typeId = value.Throw()
+        get => _trainerTypeId;
+        set => _trainerTypeId = value.Throw()
             .IfNull(ti => ti);
     }
 
@@ -50,7 +50,7 @@ public class Trainer: EntityClasses.Abstractions.Person
     private Trainer() { }
 
     protected Trainer(
-        Guid typeId,
+        Guid trainerTypeId,
         string firstname,
         string lastname,
         DateOnly birthday,
@@ -60,13 +60,14 @@ public class Trainer: EntityClasses.Abstractions.Person
         float price)
         : base(firstname, lastname, birthday, phone)
     {
+        TrainerTypeId = trainerTypeId;
         Experience = experience;
         Description = description;
         Price = price;
     }
 
     public static Trainer Create(
-        Guid typeId,
+        Guid trainerTypeId,
         string firstname,
         string lastname,
         DateOnly birthday,
@@ -76,7 +77,7 @@ public class Trainer: EntityClasses.Abstractions.Person
         float price)
     {
         return new(
-            typeId,
+            trainerTypeId,
             firstname,
             lastname,
             birthday,
@@ -87,7 +88,7 @@ public class Trainer: EntityClasses.Abstractions.Person
     }
 
     public void Update(
-        Guid typeId,
+        Guid trainerTypeId,
         string firstname,
         string lastname,
         DateOnly birthday,
@@ -96,7 +97,7 @@ public class Trainer: EntityClasses.Abstractions.Person
         string description,
         float price)
     {
-        TypeId = typeId;
+        TrainerTypeId = trainerTypeId;
         FirstName = firstname; 
         LastName = lastname;
         Birthday = birthday;
