@@ -117,6 +117,7 @@
             Name = "CourtForm";
             ShowIcon = false;
             Text = "Список кортов";
+            FormClosing += CourtForm_FormClosing;
             tableLayoutPanel1.ResumeLayout(false);
             tableLayoutPanel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
