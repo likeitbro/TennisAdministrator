@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace EntityClasses;
 
-internal class ApplicationDbContext: DbContext
+public class ApplicationDbContext: DbContext
 {
     public DbSet<ProductType> ProductTypes { get; set; }
 
