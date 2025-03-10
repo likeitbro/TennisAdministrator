@@ -1,3 +1,5 @@
+using EntityClasses;
+
 namespace TennisAdministrator
 {
     public partial class MainForm : Form
@@ -5,6 +7,9 @@ namespace TennisAdministrator
         public MainForm()
         {
             InitializeComponent();
+            ApplicationDbContext dbContext = new ApplicationDbContext();
+            dbContext.Database.EnsureCreated();
+            dbContext?.Dispose();
         }
 
         private void button1_Click(object sender, EventArgs e)
