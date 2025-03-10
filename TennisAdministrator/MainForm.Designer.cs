@@ -34,9 +34,11 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 450);
+            ClientSize = new Size(1264, 681);
+            MinimumSize = new Size(1280, 720);
             Name = "MainForm";
-            Text = "MainForm";
+            ShowIcon = false;
+            Text = "НСИ Теннисного Клуба";
             ResumeLayout(false);
         }
 
