@@ -47,14 +47,16 @@ namespace TennisAdministrator
             new DataGridViewButtonColumn();
             updateColumn.HeaderText = "";
             updateColumn.Name = "Update";
-            updateColumn.Text = "Изменить";
+            updateColumn.Text = "✎";
+            updateColumn.DefaultCellStyle.BackColor = Color.DarkBlue;
             updateColumn.UseColumnTextForButtonValue = true;
 
             DataGridViewButtonColumn deleteColumn =
             new DataGridViewButtonColumn();
             deleteColumn.HeaderText = "";
             deleteColumn.Name = "Delete";
-            deleteColumn.Text = "Удалить";
+            deleteColumn.Text = "🗑";
+            deleteColumn.DefaultCellStyle.BackColor = Color.Red;
             deleteColumn.UseColumnTextForButtonValue = true;
 
             dataGridView1.Columns.AddRange(updateColumn, deleteColumn);
