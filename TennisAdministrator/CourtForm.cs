@@ -107,6 +107,14 @@ namespace TennisAdministrator
                     UpdateTable();
                 }
             }
+            if (senderGrid.Columns[e.ColumnIndex].Name == "Update" && e.RowIndex >= 0)
+            {
+                Guid id = Guid.Parse(senderGrid.Rows[e.RowIndex].Cells["Id"].Value.ToString());
+                Court? court = dbContext.Courts.FirstOrDefault(c => c.Id == id);
+                CourtCreateDialogForm addDialogForm = new CourtCreateDialogForm(dbContext, court);
+                addDialogForm.ShowDialog();
+                UpdateTable();
+            }
         }
     }
 }

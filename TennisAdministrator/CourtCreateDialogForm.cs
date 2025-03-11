@@ -9,11 +9,20 @@ namespace TennisAdministrator
         float price = 0;
         string? description;
         ApplicationDbContext _dbContext;
+        Court _court;
 
-        public CourtCreateDialogForm(ApplicationDbContext dbContext)
+        public CourtCreateDialogForm(ApplicationDbContext dbContext, Court court = null)
         {
             InitializeComponent();
             _dbContext = dbContext;
+            if (court is not null)
+            {
+                _court = court;
+                label1.Text = "Изменить данные о корте";
+                textBox1.Text = court.Name;
+                textBox2.Text = court.Price.ToString();
+                textBox3.Text = court.Description;
+            }
         }
 
         private bool ValidateInput()
@@ -62,9 +71,14 @@ namespace TennisAdministrator
         {
             if (ValidateInput())
             {
-                Court court = Court.Create(name, description, price);
-                _dbContext.Courts.Add(court);
-                _dbContext.SaveChangesAsync();
+                if (_court is not null)
+                    _court.Update(name, description, price);
+                else
+                {
+                    _court = Court.Create(name, description, price);
+                    _dbContext.Courts.Add(_court);
+                }
+                _dbContext.SaveChanges();
                 this.Close();
             }
         }
