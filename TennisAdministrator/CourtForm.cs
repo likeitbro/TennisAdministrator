@@ -32,6 +32,7 @@ namespace TennisAdministrator
             dataGridView1.Columns["Price"].HeaderText = "Стоимость/час";
             dataGridView1.Columns["Description"].HeaderText = "Описание";
 
+            dataGridView1.ReadOnly = true;
             dataGridView1.AllowUserToAddRows = false;
             dataGridView1.AllowUserToDeleteRows = false;
             dataGridView1.AllowUserToOrderColumns = true;
@@ -48,6 +49,12 @@ namespace TennisAdministrator
             if (mainForm != null)
                 mainForm.Activate();
             this.Close();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            CourtCreateDialogForm addDialogForm = new CourtCreateDialogForm();
+            addDialogForm.ShowDialog();
         }
 
         private void CourtForm_FormClosing(object sender, FormClosingEventArgs e)
