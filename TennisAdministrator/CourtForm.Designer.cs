@@ -79,6 +79,7 @@
             dataGridView1.Name = "dataGridView1";
             dataGridView1.Size = new Size(1258, 595);
             dataGridView1.TabIndex = 1;
+            dataGridView1.CellClick += dataGridView1_CellClick;
             // 
             // button1
             // 
@@ -90,7 +91,7 @@
             button1.Size = new Size(34, 34);
             button1.TabIndex = 2;
             button1.UseVisualStyleBackColor = true;
-            button1.Click += this.button1_Click;
+            button1.Click += button1_Click;
             // 
             // button2
             // 
