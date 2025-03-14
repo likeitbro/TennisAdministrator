@@ -34,6 +34,7 @@ namespace TennisAdministrator
             dataGridView1.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
             dataGridView1.RowHeadersVisible = false;
             dataGridView1.AutoGenerateColumns = false;
+            dataGridView1.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
 
             dataGridView1.Columns["Id"].Visible = false;
 
@@ -45,7 +46,7 @@ namespace TennisAdministrator
 
             DataGridViewButtonColumn updateColumn =
             new DataGridViewButtonColumn();
-            updateColumn.HeaderText = "";
+            updateColumn.HeaderText = "Изменить";
             updateColumn.Name = "Update";
             updateColumn.Text = "✎";
             updateColumn.DefaultCellStyle.BackColor = Color.DarkBlue;
@@ -53,7 +54,7 @@ namespace TennisAdministrator
 
             DataGridViewButtonColumn deleteColumn =
             new DataGridViewButtonColumn();
-            deleteColumn.HeaderText = "";
+            deleteColumn.HeaderText = "Удалить";
             deleteColumn.Name = "Delete";
             deleteColumn.Text = "🗑";
             deleteColumn.DefaultCellStyle.BackColor = Color.Red;
