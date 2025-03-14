@@ -52,7 +52,7 @@ namespace TennisAdministrator
                         trainer.Price,
                         trainer.Birthday,
                         trainer.Phone,
-                        trainer.Experience);
+                        trainer.Experience.Year);
                 }
             }
             dataGridView1.DataSource = dt;
@@ -130,6 +130,45 @@ namespace TennisAdministrator
         private void TrainerForm_FormClosing(object sender, FormClosingEventArgs e)
         {
             dbContext?.Dispose();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            TrainerCreateDialogForm addDialogForm = new TrainerCreateDialogForm(dbContext);
+            addDialogForm.ShowDialog();
+            UpdateTable();
+        }
+
+        private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            var senderGrid = (DataGridView)sender;
+
+            if (senderGrid.Columns[e.ColumnIndex].Name == "Delete" && e.RowIndex >= 0)
+            {
+                var confirmResult = MessageBox.Show("Вы уверены, что желаете удалить объект?",
+                                                    "Подтверждение удаления",
+                                                    MessageBoxButtons.OKCancel);
+                if (confirmResult == DialogResult.OK)
+                {
+                    Guid id = Guid.Parse(senderGrid.Rows[e.RowIndex].Cells["Id"].Value.ToString());
+                    Trainer? trainer = dbContext.Trainers.FirstOrDefault(t => t.Id == id);
+
+                    if (trainer is not null)
+                    {
+                        dbContext.Trainers.Remove(trainer);
+                        dbContext.SaveChanges();
+                    }
+                    UpdateTable();
+                }
+            }
+            if (senderGrid.Columns[e.ColumnIndex].Name == "Update" && e.RowIndex >= 0)
+            {
+                Guid id = Guid.Parse(senderGrid.Rows[e.RowIndex].Cells["Id"].Value.ToString());
+                Trainer? trainer = dbContext.Trainers.FirstOrDefault(t => t.Id == id);
+                TrainerCreateDialogForm addDialogForm = new TrainerCreateDialogForm(dbContext, trainer);
+                addDialogForm.ShowDialog();
+                UpdateTable();
+            }
         }
     }
 }

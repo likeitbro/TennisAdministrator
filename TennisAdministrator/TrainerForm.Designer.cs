@@ -54,7 +54,7 @@
             tableLayoutPanel1.RowCount = 3;
             tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 40F));
             tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 40F));
-            tableLayoutPanel1.RowStyles.Add(new RowStyle());
+            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
             tableLayoutPanel1.Size = new Size(1264, 681);
             tableLayoutPanel1.TabIndex = 0;
             // 
@@ -88,6 +88,7 @@
             dataGridView1.Name = "dataGridView1";
             dataGridView1.Size = new Size(1258, 595);
             dataGridView1.TabIndex = 1;
+            dataGridView1.CellClick += dataGridView1_CellClick;
             dataGridView1.RowPrePaint += dataGridView1_RowPrePaint;
             // 
             // button1
@@ -100,6 +101,7 @@
             button1.Size = new Size(34, 34);
             button1.TabIndex = 2;
             button1.UseVisualStyleBackColor = true;
+            button1.Click += button1_Click;
             // 
             // button2
             // 
