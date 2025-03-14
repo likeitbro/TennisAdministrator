@@ -147,9 +147,9 @@
             // button1
             // 
             button1.Dock = DockStyle.Right;
-            button1.Location = new Point(359, 168);
+            button1.Location = new Point(365, 168);
             button1.Name = "button1";
-            button1.Size = new Size(106, 25);
+            button1.Size = new Size(100, 25);
             button1.TabIndex = 7;
             button1.Text = "Сохранить";
             button1.UseVisualStyleBackColor = true;
@@ -193,6 +193,7 @@
             // 
             // CourtCreateDialogForm
             // 
+            AcceptButton = button1;
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             AutoSize = true;
