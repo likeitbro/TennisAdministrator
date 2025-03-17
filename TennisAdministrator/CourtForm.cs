@@ -7,6 +7,7 @@ namespace TennisAdministrator
     public partial class CourtForm : Form
     {
         ApplicationDbContext dbContext;
+        int activeCellIndex = -1;
 
         public CourtForm()
         {
@@ -44,23 +45,23 @@ namespace TennisAdministrator
             dataGridView1.Columns["Price"].HeaderText = "Стоимость/час";
             dataGridView1.Columns["Description"].HeaderText = "Описание";
 
-            DataGridViewButtonColumn updateColumn =
-            new DataGridViewButtonColumn();
-            updateColumn.HeaderText = "Изменить";
-            updateColumn.Name = "Update";
-            updateColumn.Text = "✎";
-            updateColumn.DefaultCellStyle.BackColor = Color.DarkBlue;
-            updateColumn.UseColumnTextForButtonValue = true;
+            //DataGridViewButtonColumn updateColumn =
+            //new DataGridViewButtonColumn();
+            //updateColumn.HeaderText = "Изменить";
+            //updateColumn.Name = "Update";
+            //updateColumn.Text = "✎";
+            //updateColumn.DefaultCellStyle.BackColor = Color.DarkBlue;
+            //updateColumn.UseColumnTextForButtonValue = true;
 
-            DataGridViewButtonColumn deleteColumn =
-            new DataGridViewButtonColumn();
-            deleteColumn.HeaderText = "Удалить";
-            deleteColumn.Name = "Delete";
-            deleteColumn.Text = "🗑";
-            deleteColumn.DefaultCellStyle.BackColor = Color.Red;
-            deleteColumn.UseColumnTextForButtonValue = true;
+            //DataGridViewButtonColumn deleteColumn =
+            //new DataGridViewButtonColumn();
+            //deleteColumn.HeaderText = "Удалить";
+            //deleteColumn.Name = "Delete";
+            //deleteColumn.Text = "🗑";
+            //deleteColumn.DefaultCellStyle.BackColor = Color.Red;
+            //deleteColumn.UseColumnTextForButtonValue = true;
 
-            dataGridView1.Columns.AddRange(updateColumn, deleteColumn);
+            //dataGridView1.Columns.AddRange(updateColumn, deleteColumn);
 
             dataGridView1.Columns["Id"].DisplayIndex = 0;
             dataGridView1.Columns["Name"].DisplayIndex = 1;
@@ -118,6 +119,39 @@ namespace TennisAdministrator
                 addDialogForm.ShowDialog();
                 UpdateTable();
             }
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            //var confirmResult = MessageBox.Show("Вы уверены, что желаете удалить объект?",
+            //                                        "Подтверждение удаления",
+            //                                        MessageBoxButtons.OKCancel);
+            //if (confirmResult == DialogResult.OK)
+            //{
+            //    Guid id = Guid.Parse(senderGrid.Rows[e.RowIndex].Cells["Id"].Value.ToString());
+            //    Court? court = dbContext.Courts.FirstOrDefault(c => c.Id == id);
+
+            //    if (court is not null)
+            //    {
+            //        dbContext.Courts.Remove(court);
+            //        dbContext.SaveChanges();
+            //    }
+            //    UpdateTable();
+            //}
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            //Guid id = Guid.Parse(senderGrid.Rows[e.RowIndex].Cells["Id"].Value.ToString());
+            //Court? court = dbContext.Courts.FirstOrDefault(c => c.Id == id);
+            //CourtCreateDialogForm addDialogForm = new CourtCreateDialogForm(dbContext, court);
+            //addDialogForm.ShowDialog();
+            //UpdateTable();
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
