@@ -130,7 +130,7 @@
             MinimizeBox = false;
             Name = "TrainerTypeCreateDialogForm";
             ShowIcon = false;
-            Text = "Изменениие данных о типах тренеров";
+            Text = "Изменение данных о типах тренеров";
             tableLayoutPanel1.ResumeLayout(false);
             tableLayoutPanel1.PerformLayout();
             ResumeLayout(false);

@@ -204,7 +204,7 @@
             MinimizeBox = false;
             Name = "CourtCreateDialogForm";
             ShowIcon = false;
-            Text = "Изменениие данных о кортах";
+            Text = "Изменение данных о кортах";
             tableLayoutPanel1.ResumeLayout(false);
             tableLayoutPanel1.PerformLayout();
             ResumeLayout(false);
