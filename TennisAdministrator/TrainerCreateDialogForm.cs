@@ -2,6 +2,7 @@
 using EntityClasses.Person;
 using Microsoft.IdentityModel.Tokens;
 using System.Data;
+using System.Linq;
 
 namespace TennisAdministrator
 {
@@ -34,6 +35,7 @@ namespace TennisAdministrator
             if (trainer is not null)
             {
                 _trainer = trainer;
+                specializations = _dbContext.Specializations.Where(s => s.TrainerId == _trainer.Id).ToList();
                 label1.Text = "Изменить данные о тренере";
                 textBox1.Text = trainer.FirstName;
                 textBox2.Text = trainer.LastName;
@@ -43,8 +45,9 @@ namespace TennisAdministrator
                 textBox6.Text = trainer.Experience.ToString();
                 textBox7.Text = trainer.Price.ToString();
                 comboBox1.SelectedItem = trainer.TrainerType.Name;
-                foreach (var specialization in trainer.Specializations)
-                    checkedListBox1.SetItemChecked(checkedListBox1.Items.IndexOf(specialization.Sport.Name), true);
+                if (specializations is not null)
+                    foreach (var specialization in specializations)
+                        checkedListBox1.SetItemChecked(checkedListBox1.Items.IndexOf(specialization.Sport.Name), true);
             }
         }
 
@@ -159,17 +162,17 @@ namespace TennisAdministrator
                 {
                     for (int i = 0; i < checkedListBox1.Items.Count; i++)
                     {
-                        string item = checkedListBox1.GetItemText(i);
+                        string item = checkedListBox1.Items[i].ToString();
                         if (checkedListBox1.GetItemChecked(i))
                         {
-                            if (_trainer.Specializations.Where(s => s.Sport.Name == item).IsNullOrEmpty())
+                            if (specializations.Where(s => s.Sport.Name == item).IsNullOrEmpty())
                                 _dbContext.Specializations.Add(Specialization.Create(
                                     _trainer.Id,
                                     _dbContext.Sports.Where(s => s.Name == item).First().Id));
                         }
                         else
                         {
-                            if (_trainer.Specializations.Where(s => s.Sport.Name == item).IsNullOrEmpty())
+                            if (specializations.Where(s => s.Sport.Name == item).Any())
                                 _dbContext.Specializations.Remove(
                                     _dbContext.Specializations.Where(
                                         s => s.Sport.Name == item && s.TrainerId == _trainer.Id).First());

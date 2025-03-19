@@ -8,6 +8,7 @@ namespace TennisAdministrator
     {
         ApplicationDbContext dbContext;
         int activeCellIndex = 0;
+        HashSet<int> headerRows;
 
         public TrainerForm()
         {
@@ -36,10 +37,12 @@ namespace TennisAdministrator
                 ];
             foreach (string col in cols)
                 dt.Columns.Add(col);
-
+            headerRows = new HashSet<int>();
+            int idx = 0;
             foreach (TrainerType trainerType in trainerTypes)
             {
                 var row = dt.Rows.Add(trainerType.Id, trainerType.Name);
+                headerRows.Add(idx++);
                 foreach (Trainer trainer in trainers.Where(t => t.TrainerTypeId == trainerType.Id))
                 {
                     dt.Rows.Add(trainer.Id,
@@ -50,6 +53,7 @@ namespace TennisAdministrator
                         trainer.Birthday,
                         trainer.Phone,
                         trainer.Experience.Year);
+                    idx++;
                 }
             }
             dataGridView1.DataSource = dt;
@@ -144,12 +148,23 @@ namespace TennisAdministrator
             if (confirmResult == DialogResult.OK)
             {
                 Guid id = Guid.Parse(dataGridView1.Rows[activeCellIndex].Cells["Id"].Value.ToString());
-                Trainer? trainer = dbContext.Trainers.FirstOrDefault(t => t.Id == id);
-
-                if (trainer is not null)
+                if (headerRows.Contains(activeCellIndex))
                 {
-                    dbContext.Trainers.Remove(trainer);
-                    dbContext.SaveChanges();
+                    TrainerType? trainerType = dbContext.TrainerTypes.FirstOrDefault(tt => tt.Id == id);
+                    if (trainerType is not null)
+                    {
+                        dbContext.TrainerTypes.Remove(trainerType);
+                        dbContext.SaveChanges();
+                    }
+                }
+                else
+                {
+                    Trainer? trainer = dbContext.Trainers.FirstOrDefault(t => t.Id == id);
+                    if (trainer is not null)
+                    {
+                        dbContext.Trainers.Remove(trainer);
+                        dbContext.SaveChanges();
+                    }
                 }
                 UpdateTable();
             }
@@ -158,9 +173,18 @@ namespace TennisAdministrator
         private void button4_Click(object sender, EventArgs e)
         {
             Guid id = Guid.Parse(dataGridView1.Rows[activeCellIndex].Cells["Id"].Value.ToString());
-            Trainer? trainer = dbContext.Trainers.FirstOrDefault(t => t.Id == id);
-            TrainerCreateDialogForm addDialogForm = new TrainerCreateDialogForm(dbContext, trainer);
-            addDialogForm.ShowDialog();
+            if (headerRows.Contains(activeCellIndex))
+            {
+                TrainerType? trainerType = dbContext.TrainerTypes.FirstOrDefault(tt => tt.Id == id);
+                TrainerTypeCreateDialogForm addDialogForm = new TrainerTypeCreateDialogForm(dbContext, trainerType);
+                addDialogForm.ShowDialog();
+            }
+            else
+            {
+                Trainer? trainer = dbContext.Trainers.FirstOrDefault(t => t.Id == id);
+                TrainerCreateDialogForm addDialogForm = new TrainerCreateDialogForm(dbContext, trainer);
+                addDialogForm.ShowDialog();
+            }
             UpdateTable();
         }
     }
