@@ -11,6 +11,7 @@ namespace TennisAdministrator
     public partial class TrainerForm : Form
     {
         ApplicationDbContext dbContext;
+        int activeCellIndex = 0;
 
         public TrainerForm()
         {
@@ -83,24 +84,6 @@ namespace TennisAdministrator
             dataGridView1.Columns["Phone"].HeaderText = "Телефон";
             dataGridView1.Columns["Experience"].HeaderText = "Тренерский стаж с";
 
-            DataGridViewButtonColumn updateColumn =
-            new DataGridViewButtonColumn();
-            updateColumn.HeaderText = "Изменить";
-            updateColumn.Name = "Update";
-            updateColumn.Text = "✎";
-            updateColumn.DefaultCellStyle.BackColor = Color.DarkBlue;
-            updateColumn.UseColumnTextForButtonValue = true;
-
-            DataGridViewButtonColumn deleteColumn =
-            new DataGridViewButtonColumn();
-            deleteColumn.HeaderText = "Удалить";
-            deleteColumn.Name = "Delete";
-            deleteColumn.Text = "🗑";
-            deleteColumn.DefaultCellStyle.BackColor = Color.Red;
-            deleteColumn.UseColumnTextForButtonValue = true;
-
-            dataGridView1.Columns.AddRange(updateColumn, deleteColumn);
-
             dataGridView1.Columns["Id"].DisplayIndex = 0;
             dataGridView1.Columns["TypeName"].DisplayIndex = 1;
             dataGridView1.Columns["LastName"].DisplayIndex = 2;
@@ -142,33 +125,47 @@ namespace TennisAdministrator
         private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             var senderGrid = (DataGridView)sender;
-
-            if (senderGrid.Columns[e.ColumnIndex].Name == "Delete" && e.RowIndex >= 0)
+            if (e.RowIndex >= 0)
             {
-                var confirmResult = MessageBox.Show("Вы уверены, что желаете удалить объект?",
+                dataGridView1.Rows[activeCellIndex].DefaultCellStyle.BackColor = Color.White;
+                activeCellIndex = e.RowIndex;
+                dataGridView1.Rows[activeCellIndex].DefaultCellStyle.BackColor = Color.LightGray;
+                button3.Visible = true;
+                button4.Visible = true;
+            }
+            else
+            {
+                button3.Visible = false;
+                button4.Visible = false;
+            }
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            var confirmResult = MessageBox.Show("Вы уверены, что желаете удалить объект?",
                                                     "Подтверждение удаления",
                                                     MessageBoxButtons.OKCancel);
-                if (confirmResult == DialogResult.OK)
-                {
-                    Guid id = Guid.Parse(senderGrid.Rows[e.RowIndex].Cells["Id"].Value.ToString());
-                    Trainer? trainer = dbContext.Trainers.FirstOrDefault(t => t.Id == id);
-
-                    if (trainer is not null)
-                    {
-                        dbContext.Trainers.Remove(trainer);
-                        dbContext.SaveChanges();
-                    }
-                    UpdateTable();
-                }
-            }
-            if (senderGrid.Columns[e.ColumnIndex].Name == "Update" && e.RowIndex >= 0)
+            if (confirmResult == DialogResult.OK)
             {
-                Guid id = Guid.Parse(senderGrid.Rows[e.RowIndex].Cells["Id"].Value.ToString());
+                Guid id = Guid.Parse(dataGridView1.Rows[activeCellIndex].Cells["Id"].Value.ToString());
                 Trainer? trainer = dbContext.Trainers.FirstOrDefault(t => t.Id == id);
-                TrainerCreateDialogForm addDialogForm = new TrainerCreateDialogForm(dbContext, trainer);
-                addDialogForm.ShowDialog();
+
+                if (trainer is not null)
+                {
+                    dbContext.Trainers.Remove(trainer);
+                    dbContext.SaveChanges();
+                }
                 UpdateTable();
             }
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            Guid id = Guid.Parse(dataGridView1.Rows[activeCellIndex].Cells["Id"].Value.ToString());
+            Trainer? trainer = dbContext.Trainers.FirstOrDefault(t => t.Id == id);
+            TrainerCreateDialogForm addDialogForm = new TrainerCreateDialogForm(dbContext, trainer);
+            addDialogForm.ShowDialog();
+            UpdateTable();
         }
     }
 }
