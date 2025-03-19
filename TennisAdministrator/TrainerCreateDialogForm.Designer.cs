@@ -421,7 +421,7 @@
             MinimizeBox = false;
             Name = "TrainerCreateDialogForm";
             ShowIcon = false;
-            Text = "Изменениие данных о тренерах";
+            Text = "Изменение данных о тренерах";
             tableLayoutPanel1.ResumeLayout(false);
             tableLayoutPanel1.PerformLayout();
             ResumeLayout(false);
