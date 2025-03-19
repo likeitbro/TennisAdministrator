@@ -1,10 +1,6 @@
 ﻿using EntityClasses;
 using EntityClasses.Person;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.IdentityModel.Tokens;
-using System.ComponentModel;
 using System.Data;
-using System.Windows.Forms;
 
 namespace TennisAdministrator
 {
